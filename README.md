@@ -52,6 +52,12 @@ Ce code définit une application Flask simple qui renvoie une chaîne de caract�
 pip install Flask-Prometheus
 ```
 
-2. Puis, ajoutez-les lignes de code suivantes à votre fichier app.py pour configurer la collecte de métriques avec Prometheus :
+2. Puis, ajoutez-les lignes de code suivantes à votre fichier app.py pour creer lendpoint des metriques:
 
-
+```python
+@app.route('/metrics')
+def metrics():
+    resp = Response(generate_latest())
+    resp.headers['Content-type'] = 'text/plain; version=0.0.4; charset=utf-8'
+    return resp
+```
